@@ -40,11 +40,11 @@ public class NN {
     // ***************Normalization****************
     public static double CalculateMean(double[] X,int idx, int M) {
         double sum = 0.0;
-        for (int i = 0; i < X.length; i++) {
-            sum += X[idx];
-            idx+=M;
+        for (int i = idx; i < X.length; i++) {
+            sum += X[i];
+            i+=M;
         }
-        double mean=sum/M;
+        double mean=sum/K;
         return mean;
     }
 
@@ -54,7 +54,7 @@ public class NN {
             standardDiv+= Math.pow(X[j] - Mean, 2);
             j+=M;
         }
-        standardDiv = Math.sqrt(standardDiv / 4);
+        standardDiv = Math.sqrt(standardDiv / K);
         return standardDiv;
     }
 
