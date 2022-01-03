@@ -11,7 +11,10 @@ public class NN {
     static double X[];
     static double Y[];
 
-    public static void ReadFile(String nameFile) throws FileNotFoundException {
+    public static Vector<double[]> ReadFile(String nameFile,Vector<double[]> vector) throws FileNotFoundException {
+        double mean;
+        double StandardDiv;
+        double[] Normalized = new double[M];
         File file = new File(nameFile);
         Scanner read = new Scanner(file);
         M = read.nextInt();
@@ -29,7 +32,8 @@ public class NN {
             }
 
         }
-       read.close();
+        vector = GaussianNormalization(X, M);
+        return vector;
 
     }
 
