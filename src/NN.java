@@ -38,21 +38,19 @@ public class NN {
     }
 
     // ***************Normalization****************
-    public static double CalculateMean(double[] X,int idx, int M) {
+    public static double CalculateMean(double[] X,int idx) {
         double sum = 0.0;
-        for (int i = idx; i < X.length;) {
-            sum += X[i];
-            i+=M;
+        for (int i = 0; i < K;i++) {
+            sum += X[(i*M)+idx];
         }
         double mean=sum/K;
         return mean;
     }
 
-    public static double CalculateStandardDiv(double[] X,int idx, int M,double Mean) {
+    public static double CalculateStandardDiv(double[] X,int idx,double Mean) {
         double standardDiv = 0.0;
-        for (int j = idx; j < X.length;) {
-            standardDiv+= Math.pow(X[j] - Mean, 2);
-            j+=M;
+        for (int j = 0; j < K;j++) {
+            standardDiv+= Math.pow(X[(j*M)+idx] - Mean, 2);
         }
         standardDiv = Math.sqrt(standardDiv / K);
         return standardDiv;
@@ -61,13 +59,15 @@ public class NN {
     public static Vector<double[]> GaussianNormalization(double[] X, int M) {
         Vector<double[]> vector = new Vector<double[]>();
         double normalizedInputs[] = new double[M];
-        double Mean;
-        double std_dev;
+        double[]  Mean = new double[M];
+        double[] std_dev = new double[M];
+        for (int i = 0; i < M; i++){
+            Mean[i] = CalculateMean(X, i);
+            std_dev[i] = CalculateStandardDiv(X, i,Mean[i]);
+        }
         for (int j = 0; j < K; j++) {
             for (int i = 0; i < M; i++) {
-                Mean = CalculateMean(X, i, M);
-                std_dev = CalculateStandardDiv(X, i, M,Mean);
-                normalizedInputs[i] = (X[(j*M)+i] - Mean) / std_dev;
+                normalizedInputs[i] = (X[(j*M)+i] -  Mean[i]) / std_dev[i];
             }
             vector.add(j, normalizedInputs);
         }
