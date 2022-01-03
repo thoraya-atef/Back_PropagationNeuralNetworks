@@ -40,7 +40,7 @@ public class NN {
     // ***************Normalization****************
     public static double CalculateMean(double[] X,int idx, int M) {
         double sum = 0.0;
-        for (int i = idx; i < X.length; i++) {
+        for (int i = idx; i < X.length;) {
             sum += X[i];
             i+=M;
         }
