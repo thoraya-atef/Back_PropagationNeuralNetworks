@@ -243,8 +243,6 @@ public class NN {
             {
                 MSerors=sumError;
             }
-           System.out.println("Mean Square Error of iteration "+(i+1)+" = "+sumError);
-
 
         }
 
@@ -259,7 +257,7 @@ public class NN {
         double Output[] = new double[N];
         double MSerors[] = new double[K];
         System.out.println("-----------------------------------------------");
-        System.out.println("Mean Square Error in  Second Program \n");
+        System.out.println(" Second Program ");
         System.out.println("---------------------------------------------------");
         for(int j=0;j<K;j++) {
             Hidden = FeedForward_hidden(Weights_hidden_layer.get(j), v.get(j));
